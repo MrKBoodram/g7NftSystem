@@ -1,0 +1,31 @@
+[toolchain]
+package_manager = "yarn"
+
+[features]
+resolution = true
+skip-lint = false
+seeds = false
+
+[programs.localnet]
+anchor_program = "96MN7K4ArcwdguXMUmVphVaapp5xFyLzpKTrD8dKohGF"
+
+[programs.devnet]
+anchor_program = "96MN7K4ArcwdguXMUmVphVaapp5xFyLzpKTrD8dKohGF"
+
+[registry]
+url = "https://api.apr.dev"
+
+[provider]
+cluster = "devnet"
+wallet = "~/.config/solana/id.json"
+
+[scripts]
+test = "yarn run mocha -t 1000000 tests/"
+
+[test.validator]
+url = "https://api.devnet.solana.com"
+
+[test]
+startup_wait = 5000
+shutdown_wait = 2000
+upgradeable = false

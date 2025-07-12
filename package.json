@@ -1,0 +1,12 @@
+{
+  "name": "soltix",
+  "version": "1.0.0",
+  "scripts": {
+    "build-program": "cd anchor-program && anchor build",
+    "deploy-program": "cd anchor-program && anchor deploy --provider.cluster devnet",
+    "test-program": "cd anchor-program && anchor test --skip-local-validator",
+    "dev-frontend": "cd frontend && npm run dev",
+    "install-all": "cd anchor-program && npm install && cd ../frontend && npm install",
+    "setup": "npm run install-all && npm run build-program"
+  }
+}
