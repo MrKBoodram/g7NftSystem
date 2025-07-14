@@ -88,3 +88,6 @@ soltix/
 - Issue #3: Implement mint_ticket instruction
 - Issue #5: Wallet connection UI
 - Issue #6-11: Feature-specific components
+
+# deployment
+https://explorer.solana.com/tx/nXakeyGzbun6z1nJbgE1HW8dzBs3wiooPConuSRirnWuykWK8KSJx4Y1CaNtoceAiUJZyQWxZrayaYGwSHkezZL?cluster=devnet
