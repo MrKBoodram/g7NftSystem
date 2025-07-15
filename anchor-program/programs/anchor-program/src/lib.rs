@@ -2,7 +2,7 @@ use anchor_lang::prelude::*;
 use anchor_spl::token::{self, Token, MintTo, InitializeMint};
 use anchor_spl::associated_token::{AssociatedToken, Create};
 
-declare_id!("96MN7K4ArcwdguXMUmVphVaapp5xFyLzpKTrD8dKohGF");
+declare_id!("5Ndp1zpUwYgXtwTEx74Dz1geE34PgccMLtcnU7o3xVp2");
 
 #[program]
 pub mod anchor_program {

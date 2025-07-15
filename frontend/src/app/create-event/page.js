@@ -2,13 +2,16 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useWallet } from "@solana/wallet-adapter-react";
+import { createEvent } from "@/lib/anchor";
 
 export default function CreateEvent() {
+  const wallet = useWallet();
   const [form, setForm] = useState({
-    name: "",
-    date: "",
-    price: "",
-    quantity: "",
+    name: "testa",
+    date: "2025-12-08",
+    //price: "",
+    //quantity: "",
   });
   const router = useRouter();
 
@@ -16,11 +19,17 @@ export default function CreateEvent() {
     setForm({ ...form, [e.target.name]: e.target.value });
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
+    if (!wallet.publicKey) {
+      alert("Please connect your wallet first!");
+      return;
+    }
+    const res = await createEvent(wallet, form);
     // Here you would handle event creation logic (API call, etc.)
     alert(`Event Created:\n${JSON.stringify(form, null, 2)}`);
-    router.push("/");
+
+    //router.push("/");
   }
 
   return (
@@ -50,6 +59,7 @@ export default function CreateEvent() {
               className="w-full p-2 rounded"
             />
           </div>
+          {/*
           <div>
             <label className="block text-white mb-2">Price (SOL)</label>
             <input
@@ -75,6 +85,7 @@ export default function CreateEvent() {
               className="w-full p-2 rounded"
             />
           </div>
+          */}
           <button
             type="submit"
             className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded"
