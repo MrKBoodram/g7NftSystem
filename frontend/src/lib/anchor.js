@@ -18,15 +18,13 @@ export function getProgram(wallet) {
 export async function createEvent(wallet, { name, date }) {
   const program = getProgram(wallet);
   
-  const bufferedEventWord = Buffer.from("event");
-  const bufferedTokenMintWord = Buffer.from("token_mint");
   const operatorPublicKey = wallet.publicKey.toBuffer();
   const bufferedName = Buffer.from(name);
 
   // Derive the event PDA (seeds: ["event", organizer, event_name])
   const [eventPda] = web3.PublicKey.findProgramAddressSync(
     [
-      bufferedEventWord,
+      Buffer.from("event"),
       operatorPublicKey,
       bufferedName,
     ],
@@ -34,16 +32,14 @@ export async function createEvent(wallet, { name, date }) {
   );
   const [tokenMintPda] = web3.PublicKey.findProgramAddressSync(
     [
-      bufferedTokenMintWord,
+      Buffer.from("token_mint"),
       operatorPublicKey,
       bufferedName,
     ],
     program.programId
   );
-  console.log("eventPda: ", eventPda);
-  console.log("tokenMintPda: ", tokenMintPda);
 
-  const res = await program.methods
+  return await program.methods
     .createEvent(name, date)
     .accounts({
       event: eventPda,
@@ -54,6 +50,4 @@ export async function createEvent(wallet, { name, date }) {
       rent: web3.SYSVAR_RENT_PUBKEY
     })
     .rpc();
-  console.log('res: ', res);
-  return res;
 }
