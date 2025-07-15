@@ -92,9 +92,13 @@ soltix/
 - [x] On page load show all events created with contract
 - [x] mock out mint button that will trigger minting ticket for event
 
+### Issue #8 ✅ -  Mint event's ticket (DONE)
+
+- [x] clicking mint will call contract's mint_ticket instruction
+
 ### Next Steps
 
-- Issue #8-11: Feature-specific components
+- Issue #9-11: Feature-specific components
 
 
 # CLI scripts

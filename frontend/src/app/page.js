@@ -2,7 +2,7 @@
 
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { getEvents } from "@/lib/anchor";
+import { getEvents, mintTicket } from "@/lib/anchor";
 import { useEffect, useState } from "react";
 import EventDetails from "@/components/EventDetails";
 
@@ -18,7 +18,11 @@ export default function Home() {
     };
     fn();
   }, []);
-  console.log(events);
+  
+  async function handleMintTicket(event) {
+    const res = await mintTicket(wallet, event);
+    alert(`minted ticket: res: ${res}`);
+  }
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-purple-900 to-blue-900 p-8">
@@ -42,7 +46,7 @@ export default function Home() {
               <p className="text-lg">
                 Connected wallet: {publicKey?.toString().slice(0, 8)}...
               </p>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
                 <div className="bg-purple-600 hover:bg-purple-700 p-6 rounded-lg cursor-pointer transition-colors">
                   <h4 className="text-xl font-semibold mb-2">Create Event</h4>
                   <p className="opacity-90">Issue tickets as tokens</p>
@@ -50,10 +54,6 @@ export default function Home() {
                 <div className="bg-green-600 hover:bg-green-700 p-6 rounded-lg cursor-pointer transition-colors">
                   <h4 className="text-xl font-semibold mb-2">My Tickets</h4>
                   <p className="opacity-90">View QR codes</p>
-                </div>
-                <div className="bg-green-600 hover:bg-green-700 p-6 rounded-lg cursor-pointer transition-colors">
-                  <h4 className="text-xl font-semibold mb-2">My Tickets</h4>
-                  <p className="opacity-90">{events.length}</p>
                 </div>
               </div>
             </div>
@@ -70,7 +70,7 @@ export default function Home() {
           )}
         </div>
         {events.map((event, ix) => {
-          return (<EventDetails key={ix} event={event} onAction={() => alert('mint ticket')} />);
+          return (<EventDetails key={ix} event={event} onAction={() => handleMintTicket(event)} />);
         })}
       </div>
     </main>
