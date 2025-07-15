@@ -2,9 +2,23 @@
 
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import { useWallet } from "@solana/wallet-adapter-react";
+import { getEvents } from "@/lib/anchor";
+import { useEffect, useState } from "react";
+import EventDetails from "@/components/EventDetails";
 
 export default function Home() {
-  const { connected, publicKey } = useWallet();
+  const wallet = useWallet();
+  const { connected, publicKey } = wallet;
+  let [events, setEvents] = useState([]);
+  
+  useEffect(() => {
+    const fn = async() => {
+      const res = await getEvents(wallet);
+      setEvents(res);
+    };
+    fn();
+  }, []);
+  console.log(events);
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-purple-900 to-blue-900 p-8">
@@ -33,13 +47,13 @@ export default function Home() {
                   <h4 className="text-xl font-semibold mb-2">Create Event</h4>
                   <p className="opacity-90">Issue tickets as tokens</p>
                 </div>
-                <div className="bg-blue-600 hover:bg-blue-700 p-6 rounded-lg cursor-pointer transition-colors">
-                  <h4 className="text-xl font-semibold mb-2">Browse Events</h4>
-                  <p className="opacity-90">Find and buy tickets</p>
-                </div>
                 <div className="bg-green-600 hover:bg-green-700 p-6 rounded-lg cursor-pointer transition-colors">
                   <h4 className="text-xl font-semibold mb-2">My Tickets</h4>
                   <p className="opacity-90">View QR codes</p>
+                </div>
+                <div className="bg-green-600 hover:bg-green-700 p-6 rounded-lg cursor-pointer transition-colors">
+                  <h4 className="text-xl font-semibold mb-2">My Tickets</h4>
+                  <p className="opacity-90">{events.length}</p>
                 </div>
               </div>
             </div>
@@ -55,6 +69,9 @@ export default function Home() {
             </div>
           )}
         </div>
+        {events.map((event, ix) => {
+          return (<EventDetails key={ix} event={event} onAction={() => alert('mint ticket')} />);
+        })}
       </div>
     </main>
   );
