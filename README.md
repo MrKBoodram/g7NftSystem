@@ -84,7 +84,7 @@ soltix/
 
 ### Next Steps
 
-- Issue #2: Implement create_event instruction
-- Issue #3: Implement mint_ticket instruction
+- [x] Issue #2: Implement create_event instruction
+- [x] Issue #3: Implement mint_ticket instruction
 - Issue #5: Wallet connection UI
 - Issue #6-11: Feature-specific components
