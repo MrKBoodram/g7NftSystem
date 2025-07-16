@@ -1,15 +1,17 @@
 "use client";
 
+import { useState } from "react";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { useRouter } from "next/navigation";
+import CreateEventModal from "@/components/CreateEventModal";
 
 
 export default function Home() {
   const { connected, publicKey } = useWallet();
-  const router = useRouter();
+  const [modalOpen, setModalOpen] = useState(false);
 
   return (
+    <>
     <main className="min-h-screen bg-gradient-to-br from-purple-900 to-blue-900 p-8">
       <div className="max-w-4xl mx-auto">
         <nav className="flex justify-between items-center mb-12">
@@ -34,7 +36,7 @@ export default function Home() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
                 <div 
                   className="bg-purple-600 hover:bg-purple-700 p-6 rounded-lg cursor-pointer transition-colors"
-                  onClick={() => router.push("/create-event")}>
+                  onClick={() => setModalOpen(true)}>
                   <h4 className="text-xl font-semibold mb-2">Create Event</h4>
                   <p className="opacity-90">Issue tickets as tokens</p>
                 </div>
@@ -62,5 +64,11 @@ export default function Home() {
         </div>
       </div>
     </main>
+    <CreateEventModal
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        onSuccess={(tx) => alert(`Event created!\n${tx}`)}
+      />
+    </>
   );
 }

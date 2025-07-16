@@ -82,18 +82,24 @@ soltix/
 - [x] Wallet adapter integration
 - [x] Basic UI structure
 
+### Issue #5 & #6 ✅ - Event Organizer UI/UX (DONE)
+- [x] Create event page/modal
+- [x] Connect page to call create_event instruction
+
+### Issue #7 & #8 - Attendee UI/UX
+- [x] Create event page/modal
+- [x] Connect page to call create_event instruction
+
 ### Issue #10 & 11 ✅ - Ticket Verification & QR Code (DONE)
 
 ### Next Steps
-
-- [x] Issue #2: Implement create_event instruction
-- [x] Issue #3: Implement mint_ticket instruction
+- Issue #2: Implement create_event instruction
+- Issue #3: Implement mint_ticket instruction
 - Issue #5: Wallet connection UI
 - Issue #6-9: Feature-specific components
 
 # deployment
 https://explorer.solana.com/tx/nXakeyGzbun
-
 
 # CLI scripts
 
