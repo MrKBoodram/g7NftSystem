@@ -86,10 +86,81 @@ soltix/
 
 ### Next Steps
 
-- Issue #2: Implement create_event instruction
-- Issue #3: Implement mint_ticket instruction
+- [x] Issue #2: Implement create_event instruction
+- [x] Issue #3: Implement mint_ticket instruction
 - Issue #5: Wallet connection UI
 - Issue #6-9: Feature-specific components
 
 # deployment
-https://explorer.solana.com/tx/nXakeyGzbun6z1nJbgE1HW8dzBs3wiooPConuSRirnWuykWK8KSJx4Y1CaNtoceAiUJZyQWxZrayaYGwSHkezZL?cluster=devnet
+https://explorer.solana.com/tx/nXakeyGzbun
+
+
+# CLI scripts
+
+## create an event
+
+Execute the following command:
+```
+cd anchor-program
+node scripts/create-event.js "Encode solana bootcamp" "2024-07-01" 
+```
+
+The result should be similar: 
+```
+🎫 Creating event: "Encode solana bootcamp" on 2024-07-01
+👤 Organizer: 7kimE1HfzKk4abxCodufXK7Y2HxUfAx2YCBmxWEjfLap
+📋 Program ID: 5M5gc4khWwyba2iz9bAmUV2j9SaG5ki1BFvV1tsnoEQg
+📍 Event PDA: EnjEvhRnc3Y3brbudW1DMm66eH9HgUPxWEtXmB45u21j
+🪙 Token Mint PDA: 6rp2uyWFgKVmMZ1wcFqy4HteSNYkR6o7i7TMkxGFT8oW
+💰 Balance: 2.29 SOL
+🚀 Sending transaction...
+✅ Event created successfully!
+📋 Transaction: jTzd47BSPQoYKpWjLByQB6oZKhFXvjRPPz6fcvhzpDMf19qG4p43h4evUeXt3QyRxpyuuvFmTW7r91KcvPvQGsq
+🔗 Explorer: https://explorer.solana.com/tx/jTzd47BSPQoYKpWjLByQB6oZKhFXvjRPPz6fcvhzpDMf19qG4p43h4evUeXt3QyRxpyuuvFmTW7r91KcvPvQGsq?cluster=devnet
+🎫 Event Explorer: https://explorer.solana.com/address/EnjEvhRnc3Y3brbudW1DMm66eH9HgUPxWEtXmB45u21j?cluster=devnet
+
+📊 Event Details:
+Name: "Encode solana bootcamp"
+Date: 2024-07-01
+Organizer: 7kimE1HfzKk4abxCodufXK7Y2HxUfAx2YCBmxWEjfLap
+Token Mint: 6rp2uyWFgKVmMZ1wcFqy4HteSNYkR6o7i7TMkxGFT8oW
+```
+
+## list events
+Execute the following command:
+```
+cd anchor-program
+node scripts/list-events.js           
+```
+The result should be something like: 
+```
+🔍 Fetching all SolTix events...
+
+📋 Program ID: 5M5gc4khWwyba2iz9bAmUV2j9SaG5ki1BFvV1tsnoEQg
+🌐 Network: Devnet
+👤 Current Wallet: 7kimE1HfzKk4abxCodufXK7Y2HxUfAx2YCBmxWEjfLap
+
+✅ Found 3 event(s):
+
+══════════════════════════════════════════════════════════════════════════════════════════
+🎫 Event #1:
+📅 Name: "Summer Festival"
+📆 Date: 2024-08-15
+👤 Organizer: 7kimE1HfzKk4abxCodufXK7Y2HxUfAx2YCBmxWEjfLap
+🪙 Token Mint: qj7kzEwTSrX9mWAmGzVrPQqn4WZspRiUzKVyXUx3eLW
+📍 Event PDA: BHhNQCuA5v7tSyX92TiDCg852NCKuomLCEh3njGDnLHn
+🔗 Event Explorer: https://explorer.solana.com/address/BHhNQCuA5v7tSyX92TiDCg852NCKuomLCEh3njGDnLHn?cluster=devnet
+🎨 Token Explorer: https://explorer.solana.com/address/qj7kzEwTSrX9mWAmGzVrPQqn4WZspRiUzKVyXUx3eLW?cluster=devnet
+👑 You are the organizer of this event
+─────────────────────────────────────────────────────────────────────────────────────
+🎫 Event #2:
+📅 Name: "Encode solana bootcamp"
+📆 Date: 2024-07-01
+👤 Organizer: 7kimE1HfzKk4abxCodufXK7Y2HxUfAx2YCBmxWEjfLap
+🪙 Token Mint: 6rp2uyWFgKVmMZ1wcFqy4HteSNYkR6o7i7TMkxGFT8oW
+📍 Event PDA: EnjEvhRnc3Y3brbudW1DMm66eH9HgUPxWEtXmB45u21j
+🔗 Event Explorer: https://explorer.solana.com/address/EnjEvhRnc3Y3brbudW1DMm66eH9HgUPxWEtXmB45u21j?cluster=devnet
+🎨 Token Explorer: https://explorer.solana.com/address/6rp2uyWFgKVmMZ1wcFqy4HteSNYkR6o7i7TMkxGFT8oW?cluster=devnet
+👑 You are the organizer of this event
+....
+```

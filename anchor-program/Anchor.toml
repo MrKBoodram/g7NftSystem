@@ -1,5 +1,6 @@
 [toolchain]
 package_manager = "yarn"
+anchor_version = "0.31.1"
 
 [features]
 resolution = true
@@ -10,7 +11,7 @@ seeds = false
 anchor_program = "96MN7K4ArcwdguXMUmVphVaapp5xFyLzpKTrD8dKohGF"
 
 [programs.devnet]
-anchor_program = "96MN7K4ArcwdguXMUmVphVaapp5xFyLzpKTrD8dKohGF"
+anchor_program = "5M5gc4khWwyba2iz9bAmUV2j9SaG5ki1BFvV1tsnoEQg"
 
 [registry]
 url = "https://api.apr.dev"
