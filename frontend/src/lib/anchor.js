@@ -1,3 +1,5 @@
+"use client";
+
 import { Program, AnchorProvider, web3 } from "@coral-xyz/anchor";
 import { clusterApiUrl, Connection, SystemProgram } from "@solana/web3.js";
 import { TOKEN_PROGRAM_ID, ASSOCIATED_TOKEN_PROGRAM_ID, getAssociatedTokenAddress } from '@solana/spl-token';
@@ -46,6 +48,7 @@ export async function getEvents(wallet) {
     console.log('type: ', typeof(r));
     console.log('type: ', typeof(r[0]));
     return r;
+}
 
 // Helper to create an event
 export async function createEvent(wallet, { name, date }) {

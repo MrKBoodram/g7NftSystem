@@ -50,7 +50,7 @@ export default function Home() {
               <p className="text-lg">
                 Connected wallet: {publicKey?.toString().slice(0, 8)}...
               </p>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
                 <div 
                   className="bg-purple-600 hover:bg-purple-700 p-6 rounded-lg cursor-pointer transition-colors"
                   onClick={() => setModalOpen(true)}>
