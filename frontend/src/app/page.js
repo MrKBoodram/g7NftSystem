@@ -1,15 +1,18 @@
 "use client";
 
-import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
-import { useWallet } from "@solana/wallet-adapter-react";
 import { getEvents, mintTicket } from "@/lib/anchor";
 import { useEffect, useState } from "react";
+import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
+import { useWallet } from "@solana/wallet-adapter-react";
 import EventDetails from "@/components/EventDetails";
+import CreateEventModal from "@/components/CreateEventModal";
+
 
 export default function Home() {
   const wallet = useWallet();
   const { connected, publicKey } = wallet;
   let [events, setEvents] = useState([]);
+  const [modalOpen, setModalOpen] = useState(false);
   
   useEffect(() => {
     const fn = async() => {
@@ -23,8 +26,9 @@ export default function Home() {
     const res = await mintTicket(wallet, event);
     alert(`minted ticket: res: ${res}`);
   }
-
+  
   return (
+    <>
     <main className="min-h-screen bg-gradient-to-br from-purple-900 to-blue-900 p-8">
       <div className="max-w-4xl mx-auto">
         <nav className="flex justify-between items-center mb-12">
@@ -46,8 +50,10 @@ export default function Home() {
               <p className="text-lg">
                 Connected wallet: {publicKey?.toString().slice(0, 8)}...
               </p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
-                <div className="bg-purple-600 hover:bg-purple-700 p-6 rounded-lg cursor-pointer transition-colors">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
+                <div 
+                  className="bg-purple-600 hover:bg-purple-700 p-6 rounded-lg cursor-pointer transition-colors"
+                  onClick={() => setModalOpen(true)}>
                   <h4 className="text-xl font-semibold mb-2">Create Event</h4>
                   <p className="opacity-90">Issue tickets as tokens</p>
                 </div>
@@ -74,5 +80,11 @@ export default function Home() {
         })}
       </div>
     </main>
+    <CreateEventModal
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        onSuccess={(tx) => alert(`Event created!\n${tx}`)}
+      />
+    </>
   );
 }

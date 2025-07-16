@@ -46,4 +46,41 @@ export async function getEvents(wallet) {
     console.log('type: ', typeof(r));
     console.log('type: ', typeof(r[0]));
     return r;
+
+// Helper to create an event
+export async function createEvent(wallet, { name, date }) {
+  const program = getProgram(wallet);
+  
+  const operatorPublicKey = wallet.publicKey.toBuffer();
+  const bufferedName = Buffer.from(name);
+
+  // Derive the event PDA (seeds: ["event", organizer, event_name])
+  const [eventPda] = web3.PublicKey.findProgramAddressSync(
+    [
+      Buffer.from("event"),
+      operatorPublicKey,
+      bufferedName,
+    ],
+    program.programId
+  );
+  const [tokenMintPda] = web3.PublicKey.findProgramAddressSync(
+    [
+      Buffer.from("token_mint"),
+      operatorPublicKey,
+      bufferedName,
+    ],
+    program.programId
+  );
+
+  return await program.methods
+    .createEvent(name, date)
+    .accounts({
+      event: eventPda,
+      tokenMint: tokenMintPda,
+      organizer: wallet.publicKey,
+      systemProgram: SystemProgram.programId,
+      tokenProgram: TOKEN_PROGRAM_ID,
+      rent: web3.SYSVAR_RENT_PUBKEY
+    })
+    .rpc();
 }

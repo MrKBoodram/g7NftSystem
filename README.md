@@ -82,24 +82,26 @@ soltix/
 - [x] Wallet adapter integration
 - [x] Basic UI structure
 
-### Issue #5 & #6 ✅ - Create Event Page (DONE)
+### Issue #5 & #6 ✅ - Event Organizer UI/UX (DONE)
 
-- [x] Able to enter event info (name, date)
-- [x] Subitting will make call to contract's create_event instruction
+- [x] Create event page/modal
+- [x] Connect page to call create_event instruction
 
-### Issue #7 ✅ -  View all events (DONE)
+### Issue #7 & #8 ✅ - Attendee UI/UX (DONE)
 
-- [x] On page load show all events created with contract
-- [x] mock out mint button that will trigger minting ticket for event
+- [x] Create event page/modal
+- [x] Connect page to call create_event instruction
 
-### Issue #8 ✅ -  Mint event's ticket (DONE)
-
-- [x] clicking mint will call contract's mint_ticket instruction
+### Issue #10 & 11 ✅ - Ticket Verification & QR Code (DONE)
 
 ### Next Steps
 
-- Issue #9-11: Feature-specific components
+- Issue #2: Implement create_event instruction
+- Issue #3: Implement mint_ticket instruction
+- Issue #9: Feature-specific components
 
+# deployment
+https://explorer.solana.com/tx/nXakeyGzbun
 
 # CLI scripts
 
