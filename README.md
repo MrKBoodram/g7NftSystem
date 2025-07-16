@@ -82,12 +82,17 @@ soltix/
 - [x] Wallet adapter integration
 - [x] Basic UI structure
 
+### Issue #10 & 11 ✅ - Ticket Verification & QR Code (DONE)
+
 ### Next Steps
 
 - [x] Issue #2: Implement create_event instruction
 - [x] Issue #3: Implement mint_ticket instruction
 - Issue #5: Wallet connection UI
-- Issue #6-11: Feature-specific components
+- Issue #6-9: Feature-specific components
+
+# deployment
+https://explorer.solana.com/tx/nXakeyGzbun
 
 
 # CLI scripts
