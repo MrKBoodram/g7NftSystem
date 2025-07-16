@@ -2,51 +2,20 @@
 
 import { useEffect, useState } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { Connection, clusterApiUrl, PublicKey } from "@solana/web3.js";
 import QRCode from "qrcode.react";
-
-const KNOWN_EVENT_TOKENS = {
-  "TOKEN_MINT_ADDRESS_1": { name: "Solana Summer Fest" },
-  "TOKEN_MINT_ADDRESS_2": { name: "ChainHack 2025" },
-};
-
-const connection = new Connection(clusterApiUrl("devnet"));
+import { getWalletTickets } from "@/lib/anchor";
 
 export default function MyTickets() {
-  const { publicKey } = useWallet();
+  const wallet = useWallet();
+  const { publicKey } = wallet;
   const [tickets, setTickets] = useState([]);
 
   useEffect(() => {
-    if (!publicKey) return;
-
     (async () => {
-      try {
-        const tokenAccounts = await connection.getParsedTokenAccountsByOwner(publicKey, {
-          programId: new PublicKey("TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"),
-        });
-
-        const ownedTickets = tokenAccounts.value
-          .map(({ account }) => account.data.parsed.info)
-          .filter((info) => {
-            const mint = info.mint;
-            const amount = parseInt(info.tokenAmount.amount);
-            return KNOWN_EVENT_TOKENS[mint] && amount > 0;
-          })
-          .map((info) => {
-            const mint = info.mint;
-            return {
-              eventName: KNOWN_EVENT_TOKENS[mint].name,
-              mint: mint,
-              wallet: publicKey.toBase58(),
-            };
-          });
-
-        setTickets(ownedTickets);
-      } catch (e) {
-        console.error("Error fetching token accounts:", e);
-      }
+      const tickets = await getWalletTickets(wallet);
+      setTickets(tickets);
     })();
-  }, [publicKey]);
+  }, []);
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-purple-900 to-blue-900 p-8">

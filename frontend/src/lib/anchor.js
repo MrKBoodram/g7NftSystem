@@ -44,10 +44,7 @@ export async function mintTicket(wallet, event) {
 
 export async function getEvents(wallet) {
     const program = getProgram(wallet);
-    const r = await program.account.event.all();
-    console.log('type: ', typeof(r));
-    console.log('type: ', typeof(r[0]));
-    return r;
+    return await program.account.event.all();
 }
 
 // Helper to create an event
@@ -86,4 +83,22 @@ export async function createEvent(wallet, { name, date }) {
       rent: web3.SYSVAR_RENT_PUBKEY
     })
     .rpc();
+}
+
+export async function getWalletTickets(wallet) {
+  const ALL_EVENTS = await getEvents();
+
+  const tokenAccounts = await connection.getParsedTokenAccountsByOwner(wallet.publicKey, {
+    programId: TOKEN_PROGRAM_ID,
+  });
+
+  return tokenAccounts.value
+    .map((token) => {
+      return {
+        eventName: ALL_EVENTS.find(_ => _.account.tokenMint == token.account.data.parsed.info.mint).account.name,
+        numberOfTickets: token.account.data.parsed.info.tokenAmount.amount,
+        mint: token.account.data.parsed.info.mint,
+        wallet: token.pubkey.toBase58(), //publicKey.toBase58(),
+      };
+    });
 }
