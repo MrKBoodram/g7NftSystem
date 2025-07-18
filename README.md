@@ -172,3 +172,5 @@ The result should be something like:
 👑 You are the organizer of this event
 ....
 ```
+# Presentation Deck
+https://pitch.com/v/sol-tix-h2czj6
